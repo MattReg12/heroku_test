@@ -1,0 +1,4 @@
+<h2 class="content-subhead">Chapter <%= @number %>: <%= @contents[@number.to_i - 1] %></h2>
+  <% @chapter.each_with_index do |paragraph, i| %>
+    <p id='p<%=i%>'><%= paragraph %></p>
+  <% end %>

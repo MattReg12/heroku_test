@@ -1,0 +1,29 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if @matches %>
+  <h2>Results for '<%= @keyword %>'</h2>
+    <ul>
+    <% @matches.each do |hit_hash| %>
+      <% hit_hash.each do |chap_name, hit_arr| %>
+        <li>
+          <h3><%= chap_name %></h3>
+          <ul>
+            <% hit_arr.each do |paragraph, p_no, chap_no| %>
+            <li>
+              <a href="/chapters/<%= chap_no %>#p<%= p_no %>"> <%= strongify(paragraph, @keyword) %></a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    <% end %>
+    </ul>
+<% elsif !@keyword.nil? %>
+  <h3>Sorry, no matches were found</h3>
+<% end %>
+
